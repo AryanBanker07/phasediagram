@@ -46,18 +46,64 @@ const systems = {
             { id: "cem", name: "Cementite (Fe₃C)", color: "rgba(52, 73, 94, 0.3)", lineColor: "#2c3e50" }
         ],
         getRegions: function() {
+            let L = [[0, 1600], [0, 1538], [0.53, 1495]];
+            for(let T=1495; T>=1147; T-=5) {
+                let f = (1495 - T) / (1495 - 1147);
+                L.push([0.53 + (4.3 - 0.53) * f - 0.3 * f * (1 - f), T]);
+            }
+            L.push([4.3, 1147], [6.67, 1250], [6.67, 1600]);
+
+            let delta = [ [0, 1538], [0.09, 1495], [0, 1394] ];
+            
+            let gamma = [[0, 1394], [0.17, 1495]];
+            for(let T=1495; T>=1147; T-=5) {
+                let f = (1495 - T) / (1495 - 1147);
+                gamma.push([0.17 + (2.14 - 0.17) * f + 0.1 * f * (1 - f), T]);
+            }
+            gamma.push([2.14, 1147]);
+            for(let T=1147; T>=727; T-=5) {
+                let f = (1147 - T) / (1147 - 727);
+                gamma.push([2.14 + (0.76 - 2.14) * f - 0.4 * f * (1 - f), T]);
+            }
+            gamma.push([0.76, 727]);
+            for(let T=727; T<=912; T+=5) {
+                let f = (T - 727) / (912 - 727);
+                gamma.push([0.76 - 0.76 * f + 0.1 * f * (1 - f), T]);
+            }
+
+            let alpha = [[0, 912]];
+            for(let T=912; T>=727; T-=5) {
+                let f = (912 - T) / (912 - 727);
+                alpha.push([0.022 * f, T]);
+            }
+            alpha.push([0.022, 727]);
+            for(let T=727; T>=400; T-=5) {
+                let f = (727 - T) / (727 - 400);
+                alpha.push([0.005 + (0.022 - 0.005) * f, T]);
+            }
+            alpha.push([0, 400]);
+
+            let cem = [ [6.67, 400], [6.67, 1600], [6.671, 1600], [6.671, 400] ];
+
             return [
-                { id: "L", polygon: [ [0, 1600], [0, 1538], [0.53, 1495], [4.3, 1147], [6.67, 1250], [6.67, 1600] ] },
-                { id: "delta", polygon: [ [0, 1538], [0.09, 1495], [0, 1394] ] },
-                { id: "gamma", polygon: [ [0, 1394], [0.17, 1495], [2.14, 1147], [0.76, 727], [0.022, 727], [0, 912] ] },
-                { id: "alpha", polygon: [ [0, 912], [0.022, 727], [0.005, 400], [0, 400] ] },
-                { id: "cem", polygon: [ [6.67, 400], [6.67, 1600], [6.671, 1600], [6.671, 400] ] }
+                { id: "L", polygon: L }, { id: "delta", polygon: delta },
+                { id: "gamma", polygon: gamma }, { id: "alpha", polygon: alpha },
+                { id: "cem", polygon: cem }
             ];
         },
         invariantLines: [
             { y: 1495, xMin: 0.09, xMax: 0.53, label: 'Peritectic (1495°C)' },
             { y: 1147, xMin: 2.14, xMax: 6.67, label: 'Eutectic (1147°C)' },
             { y: 727, xMin: 0.022, xMax: 6.67, label: 'Eutectoid (727°C)' }
+        ],
+        textAnnotations: [
+            { x: 0.35, y: 1515, text: 'L + δ' },
+            { x: 0.12, y: 1440, text: 'δ + γ' },
+            { x: 1.5, y: 1350, text: 'L + γ' },
+            { x: 5.5, y: 1180, text: 'L + Fe₃C' },
+            { x: 3.5, y: 950, text: 'γ + Fe₃C' },
+            { x: 0.35, y: 800, text: 'γ + α' },
+            { x: 3.5, y: 600, text: 'α + Fe₃C' }
         ]
     },
     "peritectic": {
@@ -374,6 +420,15 @@ function updateSimulation() {
         plot_bgcolor: 'rgba(0,0,0,0)',
         paper_bgcolor: 'rgba(0,0,0,0)'
     };
+
+    if (sys.textAnnotations) {
+        layout.annotations = sys.textAnnotations.map(a => ({
+            x: a.x, y: a.y, text: a.text,
+            showarrow: false,
+            font: { color: '#00E5FF', size: 14, family: "'Chakra Petch', sans-serif" },
+            opacity: 0.8
+        }));
+    }
 
     Plotly.react('phase-diagram', data, layout);
 }
