@@ -358,7 +358,7 @@ function updateSimulation() {
     document.getElementById('bars-container').innerHTML = barsHtml;
 
     const layout = {
-        title: { text: sys.name + ' [DIAGRAM]', font: { color: '#00E5FF', family: "'Chakra Petch', sans-serif" } },
+        title: { text: sys.name + ' Phase Diagram', font: { color: '#00E5FF', family: "'Chakra Petch', sans-serif" } },
         xaxis: { 
             title: sys.xLabel, range: [sys.xMin, sys.xMax], 
             gridcolor: 'rgba(0,229,255,0.1)', tickfont: { color: '#7dd3fc', family: "'JetBrains Mono', monospace" }, titlefont: { color: '#00E5FF', family: "'JetBrains Mono', monospace" } 

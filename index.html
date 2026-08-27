@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Phase Diagram Simulator | SYS_READY</title>
+    <title>Universal Phase Diagram Simulator</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,12 +18,12 @@
     <div class="container">
         <header class="header">
             <div class="header-title">
-                <h1>SYS_DIAGRAM::INIT</h1>
-                <p>UNIVERSAL THERMODYNAMIC ENGINE v2.0</p>
+                <h1>Universal Phase Diagram Simulator</h1>
+                <p>Interactive thermodynamic engine with real-time lever rule calculations.</p>
             </div>
             
             <div class="system-selector">
-                <label for="system-select">MODULE_SELECT_</label>
+                <label for="system-select">Select Alloy System:</label>
                 <div class="select-wrapper">
                     <select id="system-select">
                         <option value="fe-c">Fe-C (Steel)</option>
@@ -37,13 +37,13 @@
         <div class="main-content">
             <div class="controls-panel panel-container">
                 <div class="panel-header">
-                    <h2>INPUT_PARAMETERS</h2>
+                    <h2>Controls</h2>
                 </div>
                 
                 <div class="panel-body">
                     <div class="slider-group">
                         <label>
-                            <span>ALLOY_COMP:</span>
+                            <span>Alloy Composition:</span>
                             <span id="comp-value" class="value-badge">30.0</span>
                         </label>
                         <input type="range" id="composition" min="0" max="100" step="0.1" value="30">
@@ -51,7 +51,7 @@
 
                     <div class="slider-group">
                         <label>
-                            <span>THERMAL_STATE:</span>
+                            <span>Temperature (&deg;C):</span>
                             <span id="temp-value" class="value-badge">850</span>
                         </label>
                         <input type="range" id="temperature" min="200" max="1150" step="1" value="850">
@@ -60,10 +60,10 @@
 
                 <div class="phase-analysis">
                     <div class="panel-header">
-                        <h2>SYSTEM_ANALYSIS</h2>
+                        <h2>Phase Analysis</h2>
                     </div>
                     <div class="panel-body">
-                        <div id="phase-status" class="status-badge blink-text">STATUS: LIQUID + α</div>
+                        <div id="phase-status" class="status-badge blink-text">Status: Liquid + &alpha;</div>
                         <div id="bars-container" class="data-readout">
                             <!-- Bars dynamically injected here -->
                         </div>
@@ -73,7 +73,7 @@
 
             <div class="plot-panel panel-container">
                 <div class="panel-header">
-                    <h2>VISUAL_INTERFACE_</h2>
+                    <h2>Phase Diagram</h2>
                 </div>
                 <div class="panel-body plot-body">
                     <div id="phase-diagram"></div>
