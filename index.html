@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Phase Diagram Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="glass-bg"></div>
+
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1>Universal Phase Diagram Simulator</h1>
+                <p>Interactive thermodynamic engine with real-time lever rule calculations.</p>
+            </div>
+            
+            <div class="system-selector">
+                <label for="system-select">Select Alloy System:</label>
+                <select id="system-select">
+                    <option value="fe-c">Fe-C (Steel)</option>
+                    <option value="cu-ag">Cu-Ag (Eutectic)</option>
+                    <option value="peritectic">Generic Peritectic</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="controls-panel glass-panel">
+                <h2>Controls</h2>
+                
+                <div class="slider-group">
+                    <label>
+                        <span>Alloy Composition:</span>
+                        <span id="comp-value" class="value-badge">30.0</span>
+                    </label>
+                    <input type="range" id="composition" min="0" max="100" step="0.1" value="30">
+                </div>
+
+                <div class="slider-group">
+                    <label>
+                        <span>Temperature (°C):</span>
+                        <span id="temp-value" class="value-badge">850</span>
+                    </label>
+                    <input type="range" id="temperature" min="200" max="1150" step="1" value="850">
+                </div>
+
+                <div class="phase-analysis">
+                    <h2>Phase Analysis</h2>
+                    <div id="phase-status" class="status-badge">Status: Liquid + α</div>
+                    <div id="bars-container">
+                        <!-- Bars dynamically injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="plot-panel glass-panel">
+                <div id="phase-diagram"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
