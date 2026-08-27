@@ -241,7 +241,7 @@ function updateSimulation() {
         
         // Single state marker
         data.push({
-            x: [C0], y: [T], mode: 'markers', marker: {color: '#f8fafc', size: 10, symbol: 'diamond'}, showlegend: false, hoverinfo: 'none'
+            x: [C0], y: [T], mode: 'markers', marker: {color: '#FF5722', size: 10, symbol: 'square-open', line: {color: '#FF5722', width: 2}}, showlegend: false, hoverinfo: 'none'
         });
         
     } else if (state.type === 'two') {
@@ -269,12 +269,12 @@ function updateSimulation() {
         // Tie line
         data.push({
             x: [state.p1.x, state.p2.x], y: [T, T],
-            mode: 'lines+markers', line: {color: '#f8fafc', width: 3}, marker: {color: '#f8fafc', size: 8}, showlegend: false, hoverinfo: 'none'
+            mode: 'lines+markers', line: {color: '#00E5FF', width: 2, dash: 'dot'}, marker: {color: '#00E5FF', size: 6, symbol: 'square'}, showlegend: false, hoverinfo: 'none'
         });
         
         // Alloy State Marker
         data.push({
-            x: [C0], y: [T], mode: 'markers', marker: {color: '#e74c3c', size: 12, symbol: 'diamond'}, showlegend: false, hoverinfo: 'none'
+            x: [C0], y: [T], mode: 'markers', marker: {color: '#FF5722', size: 12, symbol: 'square-open', line: {color: '#FF5722', width: 2}}, showlegend: false, hoverinfo: 'none'
         });
     } else {
         phaseNames.push("Unknown (check boundaries)");
@@ -358,17 +358,17 @@ function updateSimulation() {
     document.getElementById('bars-container').innerHTML = barsHtml;
 
     const layout = {
-        title: { text: sys.name + ' Phase Diagram', font: { color: '#f8fafc' } },
+        title: { text: sys.name + ' [DIAGRAM]', font: { color: '#00E5FF', family: "'Chakra Petch', sans-serif" } },
         xaxis: { 
             title: sys.xLabel, range: [sys.xMin, sys.xMax], 
-            gridcolor: 'rgba(255,255,255,0.1)', tickfont: { color: '#f8fafc' }, titlefont: { color: '#f8fafc' } 
+            gridcolor: 'rgba(0,229,255,0.1)', tickfont: { color: '#7dd3fc', family: "'JetBrains Mono', monospace" }, titlefont: { color: '#00E5FF', family: "'JetBrains Mono', monospace" } 
         },
         yaxis: { 
-            title: 'Temperature (°C)', range: [sys.yMin, sys.yMax],
-            gridcolor: 'rgba(255,255,255,0.1)', tickfont: { color: '#f8fafc' }, titlefont: { color: '#f8fafc' }
+            title: 'Temp (°C)', range: [sys.yMin, sys.yMax],
+            gridcolor: 'rgba(0,229,255,0.1)', tickfont: { color: '#7dd3fc', family: "'JetBrains Mono', monospace" }, titlefont: { color: '#00E5FF', family: "'JetBrains Mono', monospace" }
         },
         showlegend: true,
-        legend: { x: 1.05, y: 1, font: { color: '#f8fafc' }, bgcolor: 'rgba(0,0,0,0)' },
+        legend: { x: 1.05, y: 1, font: { color: '#e0f2fe', family: "'JetBrains Mono', monospace" }, bgcolor: 'rgba(0,0,0,0)' },
         hovermode: 'closest',
         margin: { l: 60, r: 120, t: 60, b: 60 },
         plot_bgcolor: 'rgba(0,0,0,0)',
